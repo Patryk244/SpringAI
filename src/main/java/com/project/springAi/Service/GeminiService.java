@@ -2,23 +2,22 @@ package com.project.springAi.Service;
 
 import com.project.springAi.Tool.DataTimeTools;
 import lombok.RequiredArgsConstructor;
-import org.apache.el.util.ReflectionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
-import org.springframework.ai.tool.definition.ToolDefinition;
-import org.springframework.ai.tool.method.MethodToolCallback;
-import org.springframework.ai.tool.support.ToolDefinitions;
-import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GeminiService {
 
+
     private final ChatModel chatModel;
+    private ToolCallback toolCallback;
 
     public String askQuestionToGemini(String prompt) {
         return ChatClient.create(chatModel)
@@ -35,11 +34,15 @@ public class GeminiService {
                 .content();
     }
 
-    public String setAlarm() {
-        return ChatClient.create(chatModel)
+    public void setAlarm() {
+        log.info("Set alarm");
+        /*
+        ChatClient.create(chatModel)
                 .prompt("Can you set an alarm 10 minutes from now?")
-                .tools(new DataTimeTools())
+                .tools(dataTimeTools)
                 .call()
                 .content();
+
+         */
     }
 }

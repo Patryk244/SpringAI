@@ -33,8 +33,8 @@ public class MyController {
     }
 
     @GetMapping("/set")
-    public String test3() {
+    public void test3() {
         log.info("Request received for /set");
-        return geminiService.setAlarm();
+        geminiService.setAlarm();
     }
 }
